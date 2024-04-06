@@ -1,0 +1,30 @@
+{% block header %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+    <title>Главные новости Казахстана</title>
+   
+    <div class="header">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" height="70">
+    </div>
+    <div class="green_line">
+        <a href="https://whatsapp.com/channel/0029VaC8d1M3AzNVm4DlYk2H">
+            Подписывайтесь на канал Tengrinews.kz в WhatsApp
+        </a>
+    </div>
+</head>
+{% endblock%}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+    <p>&copy; 2024 TengriNews</p>
+</div>
+</html>
+{% endblock %}
