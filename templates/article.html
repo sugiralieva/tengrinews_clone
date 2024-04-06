@@ -6,23 +6,23 @@
 {% block content %}
 {{ super() }}
 <body>
+    <ul class="breadcrumb">
+        <li><a href="{{ url_for('index') }}">Главная ></a>
+        </li>
+        <li>Новости</li>
+    </ul>
+
     <div class="container">
         <article class="article">
-            <h1>Заголовок статьи</h1>
-            <p>Дата публикации: 6 апреля 2024</p>
-            <p>Автор: Иван Иванов</p>
-            <p>Текст статьи: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae aliquam urna. Nullam faucibus tellus a nulla ullamcorper, nec lacinia est tincidunt. In hac habitasse platea dictumst. Curabitur bibendum libero in mauris vulputate fringilla. Fusce vel tortor semper, volutpat velit nec, tincidunt nunc. Integer id felis quis lacus laoreet dignissim nec vitae orci. Fusce malesuada, ipsum nec luctus elementum, risus odio tincidunt sapien, at ultrices velit ante vel metus. Fusce nec lobortis libero. Nulla facilisi. Cras maximus, libero ut ultricies vehicula, leo libero consequat justo, at facilisis nulla purus nec urna. Praesent ullamcorper odio ac tortor lacinia aliquam. In non ante nec urna dapibus blandit. Nunc accumsan lacus id orci tempor, in tincidunt turpis condimentum. Donec eget nulla vestibulum, bibendum nulla non, ullamcorper est. Phasellus sollicitudin orci risus, id feugiat mi cursus id.</p>
-            <p>Другой абзац текста статьи...</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima eaque, perspiciatis impedit sunt inventore soluta iusto, qui corporis non natus nobis eligendi. Incidunt tempore, corrupti voluptate praesentium error doloremque mollitia?
-            Debitis officiis, id quo, cum commodi atque eaque iusto facere esse saepe aperiam expedita et consequatur consectetur dignissimos voluptatum eius reprehenderit suscipit alias neque nesciunt. Sit quod doloribus recusandae labore!
-            Dolores magnam explicabo at optio minima facere deserunt accusamus quae distinctio consequuntur facilis, qui, non nulla fugit veritatis porro voluptate tempora maxime! Nesciunt soluta saepe sint quisquam excepturi omnis at.
-            Adipisci, nisi dolorum maiores harum omnis quidem incidunt est distinctio quisquam velit porro assumenda rerum aperiam ratione exercitationem ullam itaque possimus optio voluptatibus? Voluptates necessitatibus consequuntur, quo unde quis nihil.
-            Incidunt quis quaerat fugiat doloremque eligendi illo beatae possimus, animi voluptatem provident nam. Corrupti saepe vero nam sunt temporibus, harum nobis earum dolorum debitis impedit nulla quae voluptatum incidunt in!
-            Voluptatibus labore veniam nisi necessitatibus impedit soluta, accusamus fuga ullam earum molestias quidem consequuntur suscipit aperiam assumenda minus a provident facere repellendus temporibus. Cupiditate fugit accusantium, placeat architecto voluptatibus quae?
-            Pariatur dolores sed possimus ut dolor quibusdam quisquam itaque dolorum aspernatur consequuntur aliquid qui nemo, ducimus, perspiciatis eum? Perspiciatis a provident itaque nobis ducimus sint consequatur eius minima, temporibus dolores!
-            Ipsa eligendi quae sequi, harum vel assumenda mollitia odio voluptate exercitationem ratione facilis cum dolor similique beatae impedit ea? A commodi odio aperiam exercitationem saepe totam vel deleniti debitis ullam?
-            Eligendi, non! Sapiente distinctio suscipit perspiciatis corporis ea minima, quam temporibus architecto quidem quas modi molestias neque, accusantium repellat maxime ratione provident deleniti adipisci maiores repudiandae velit nam. Et, quisquam.
-            Sapiente quaerat at molestiae corrupti laudantium. Excepturi enim quam, iure ipsa, repellendus, necessitatibus non et perferendis reiciendis minima nemo nulla provident modi beatae sequi veniam officiis amet! Accusantium, quos eum?<p>
+            <h1>{{ full_article[0] }}</h1>
+            <div class="publication_date">
+                <p>Дата публикации: {{ full_article[2] }}</p>
+            </div>
+            <div class="article_image">
+                <img src="{{ url_for('static', filename='img/article_images/' + full_article[3]) }}" alt="" class="img-article">
+            </div>
+            <p>{{ full_article[1]|safe }}</p>
+            
         </article>
     </div>
 </body>

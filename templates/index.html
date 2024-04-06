@@ -9,30 +9,18 @@
 <body>
     <div class="container">
         <h1>Новости</h1>
+        {% for article in articles %}
         <div class="news-item">
-            <h2>Заголовок новости 1</h2>
-            <p>Текст новости 1...</p>
+            <div class="list_of_articles">
+                <a href="{{ url_for('article', article_id=article[0]) }}">
+                    <img src="{{ url_for('static', filename='img/article_images/' + article[2]) }}" alt="" class="img-news">
+                </a>
+            </div>
+            <a href="{{ url_for('article', article_id=article[0]) }}"><h3>{{ article[1] }}</h3></a>
         </div>
-        <div class="news-item">
-            <h2>Заголовок новости 2</h2>
-            <p>Текст новости 2...</p>
-        </div>
-        <div class="news-item">
-            <h2>Заголовок новости 3</h2>
-            <p>Текст новости 3...</p>
-        </div>
-        <div class="news-item">
-            <h2>Заголовок новости 1</h2>
-            <p>Текст новости 1...</p>
-        </div>
-        <div class="news-item">
-            <h2>Заголовок новости 2</h2>
-            <p>Текст новости 2...</p>
-        </div>
-        <div class="news-item">
-            <h2>Заголовок новости 3</h2>
-            <p>Текст новости 3...</p>
-        </div>
+        {% endfor %}
+
+        
         <!-- Добавьте новости здесь -->
     </div>
 </body>

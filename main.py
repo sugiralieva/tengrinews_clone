@@ -1,4 +1,3 @@
-from base64 import b64encode
 from flask import Flask
 from flask import render_template, g
 import sqlite3 as sq
@@ -44,13 +43,15 @@ def close_db(error):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    articles = dbase.get_articles_announcement()
 
-    return render_template('index.html')
+    return render_template('index.html', articles=articles)
 
-@app.route('/article', methods=['GET', 'POST'])
-def article():
+@app.route('/article/<int:article_id>', methods=['GET', 'POST'])
+def article(article_id):
+    full_article = dbase.get_full_article(article_id)
 
-    return render_template('article.html')
+    return render_template('article.html', full_article=full_article)
 
 
 if __name__ == '__main__':
