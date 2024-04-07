@@ -9,12 +9,14 @@
     <title>Главные новости Казахстана</title>
    
     <div class="header">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" height="70">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" height="70">
+        </a>
         <div class="nav">
             <ul>
-                <li>Новости</li>
-                <li>Статьи</li>
-                <li>Что будет с Казахстаном?</li>
+                <li><a href="{{ url_for('index')}}">Новости</a></li>
+                <li><a href="{{ url_for('articles')}}">Статьи</a></li>
+                <li><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном?</a></li>
             </ul>
         </div>
     </div>

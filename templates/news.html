@@ -9,19 +9,19 @@
     <ul class="breadcrumb">
         <li><a href="{{ url_for('index') }}">Главная ></a>
         </li>
-        <li>Статьи</li>
+        <li>Новости</li>
     </ul>
 
     <div class="container">
         <article class="article">
-            <h1>{{ full_article[0] }}</h1>
+            <h1>{{ full_news[0] }}</h1>
             <div class="publication_date">
-                <p>Дата публикации: {{ full_article[2] }}</p>
+                <p>Дата публикации: {{ full_news[2] }}</p>
             </div>
             <div class="article_image">
-                <img src="{{ url_for('static', filename='img/images_articles/' + full_article[3]) }}" alt="" class="img-article">
+                <img src="{{ url_for('static', filename='img/images_news/' + full_news[3]) }}" alt="" class="img-article">
             </div>
-            <p>{{ full_article[1]|safe }}</p>
+            <p>{{ full_news[1]|safe }}</p>
             
         </article>
     </div>
