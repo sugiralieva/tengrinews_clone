@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Статьи</h1>
-        {% for article in articles %}
+        {% for article in items_on_page %}
         <div class="news-item">
             <div class="list_of_articles">
                 <a href="{{ url_for('article', article_id=article[0]) }}">
@@ -22,6 +22,24 @@
 
         
         <!-- Добавьте новости здесь -->
+    </div>
+
+    <div class="pages">
+        <ul class="pagination">
+
+            {% if page > 1 %}
+            <li><a href="{{ url_for('articles', page=page-1) }}">Пред</a></li>
+            {% endif %}
+
+            {% for i in range(1, total_pages+1) %}
+            <li class="{% if page == i %} active {% endif %}"><a href="{{ url_for('articles', page=i) }}">{{ i }}</a></li>
+            {% endfor %}
+            
+            {% if page < total_pages %}
+            <li><a href="{{ url_for('articles', page=page+1) }}">След</a></li>
+            {% endif %}
+
+        </ul>
     </div>
 </body>
 

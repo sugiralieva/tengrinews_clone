@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, g
+from flask import render_template, g, request
 import sqlite3 as sq
 import os
 from tengrinews_db import ArticlesDB
@@ -45,7 +45,15 @@ def close_db(error):
 def index():
     news = dbase.get_news_announcement()
 
-    return render_template('index.html', news=news)
+    page = request.args.get('page', 1, type=int)
+    per_page = 12
+    start = (page - 1) * per_page
+    end = start + per_page
+    total_pages = (len(news) + per_page -1) // per_page
+
+    items_on_page = news[start:end]
+
+    return render_template('index.html', news=news, page=page, total_pages=total_pages, items_on_page=items_on_page)
 
 
 @app.route('/news/<int:news_id>', methods=['GET', 'POST'])
@@ -59,7 +67,15 @@ def news(news_id):
 def articles():
     articles = dbase.get_articles_announcement()
 
-    return render_template('articles.html', articles=articles)
+    page = request.args.get('page', 1, type=int)
+    per_page = 12
+    start = (page - 1) * per_page
+    end = start + per_page
+    total_pages = (len(articles) + per_page - 1) // per_page
+
+    items_on_page = articles[start:end]
+
+    return render_template('articles.html', articles=articles, page=page, total_pages=total_pages, items_on_page=items_on_page)
 
 
 @app.route('/article/<int:article_id>', methods=['GET', 'POST'])
@@ -73,7 +89,15 @@ def article(article_id):
 def kazakhstan_future_news():
     kazakhstan_news = dbase.get_kazakhstan_future_announcement()
 
-    return render_template('kazakhstan_future.html', kazakhstan_news=kazakhstan_news)
+    page = request.args.get('page', 1, type=int)
+    per_page = 12
+    start = (page - 1) * per_page
+    end = start + per_page
+    total_pages = (len(kazakhstan_news) + per_page - 1) // per_page
+
+    items_on_page = kazakhstan_news[start:end]
+
+    return render_template('kazakhstan_future.html', kazakhstan_news=kazakhstan_news, page=page, total_pages=total_pages, items_on_page=items_on_page)
 
 
 @app.route('/kazakhstan_future_new/<int:kazakhstan_news_id>', methods=['GET', 'POST'])

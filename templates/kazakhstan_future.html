@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Что будет с Казахстаном?</h1>
-        {% for news in kazakhstan_news %}
+        {% for news in items_on_page %}
         <div class="news-item">
             <div class="list_of_articles">
                 <a href="{{ url_for('kazakhstan_future_new', kazakhstan_news_id=news[0]) }}">
@@ -22,6 +22,24 @@
 
         
         <!-- Добавьте новости здесь -->
+    </div>
+
+    <div class="pages">
+        <ul class="pagination">
+
+            {% if page > 1 %}
+            <li><a href="{{ url_for('kazakhstan_future_news', page=page-1) }}">Пред</a></li>
+            {% endif %}
+
+            {% for i in range(1, total_pages+1) %}
+            <li class="{% if page == i %} active {% endif %}"><a href="{{ url_for('kazakhstan_future_news', page=i) }}">{{ i }}</a></li>
+            {% endfor %}
+            
+            {% if page < total_pages %}
+            <li><a href="{{ url_for('kazakhstan_future_news', page=page+1) }}">След</a></li>
+            {% endif %}
+
+        </ul>
     </div>
 </body>
 
