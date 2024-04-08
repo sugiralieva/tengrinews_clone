@@ -5,47 +5,55 @@
 
 {% block content %}
 {{ super() }}
-
 <body>
-    <div class="container">
-        <h1>Новости</h1>
-        {% for new in items_on_page %}
-        <div class="news-item">
-            <div class="list_of_articles">
-                <a href="{{ url_for('news', news_id=new[0]) }}">
-                    <img src="{{ url_for('static', filename='img/images_news/' + new[2]) }}" alt="" class="img-news">
-                </a>
-            </div>
-            <a href="{{ url_for('news', news_id=new[0]) }}"><h3>{{ new[1] }}</h3></a>
-        </div>
-        {% endfor %}
-
-        
-        <!-- Добавьте новости здесь -->
+<div class="main_container">
+  <div class="block">
+    <h2><a href="{{ url_for('news')}}">Новости ></a></h2>
+    {% for new in news_main %}
+    <div class="news-item-main">
+      <div class="list_of_main_news">
+          <a href="{{ url_for('new', new_id=new[0]) }}">
+              <img src="{{ url_for('static', filename='img/images_news/' + new[2]) }}" alt="" class="img-main">
+          </a>
+      </div>
+      <a href="{{ url_for('new', new_id=new[0]) }}"><h3>{{ new[1] }}</h3></a>
     </div>
+    {% endfor %}
+  </div>
 
-    <div class="pages">
-        <ul class="pagination">
 
-            {% if page > 1 %}
-            <li><a href="{{ url_for('index', page=page-1) }}">Пред</a></li>
-            {% endif %}
-
-            {% for i in range(1, total_pages+1) %}
-            <li class="{% if page == i %} active {% endif %}"><a href="{{ url_for('index', page=i) }}">{{ i }}</a></li>
-            {% endfor %}
-            
-            {% if page < total_pages %}
-            <li><a href="{{ url_for('index', page=page+1) }}">След</a></li>
-            {% endif %}
-
-        </ul>
+  <div class="block">
+    <h2><a href="{{ url_for('articles')}}">Статьи ></a></h2>
+    {% for article in articles_main %}
+    <div class="news-item-main">
+      <div class="list_of_main_news">
+          <a href="{{ url_for('article', article_id=article[0]) }}">
+              <img src="{{ url_for('static', filename='img/images_articles/' + article[2]) }}" alt="" class="img-main">
+          </a>
+      </div>
+      <a href="{{ url_for('article', article_id=article[0]) }}"><h3>{{ article[1] }}</h3></a>
     </div>
+    {% endfor %}
+  </div>
+
+
+  <div class="block">
+    <h2><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном? ></a></h2>
+    {% for news in kazakhstan_future_news_for_main %}
+    <div class="news-item-main">
+      <div class="list_of_main_news">
+          <a href="{{ url_for('kazakhstan_future_new', kazakhstan_news_id=news[0]) }}">
+              <img src="{{ url_for('static', filename='img/images_kazakhstan_future/' + news[2]) }}" alt="" class="img-main">
+          </a>
+      </div>
+      <a href="{{ url_for('kazakhstan_future_new', kazakhstan_news_id=news[0]) }}"><h3>{{ news[1] }}</h3></a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 </body>
-
 {% endblock %}
 
 {% block footer %}
 {{ super() }}
 {% endblock %}
-

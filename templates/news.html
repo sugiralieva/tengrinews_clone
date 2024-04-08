@@ -5,25 +5,50 @@
 
 {% block content %}
 {{ super() }}
-<body>
-    <ul class="breadcrumb">
-        <li><a href="{{ url_for('index') }}">Главная ></a>
-        </li>
-        <li>Новости</li>
-    </ul>
 
+<body>
     <div class="container">
-        <article class="article">
-            <h1>{{ full_news[0] }}</h1>
-            <div class="publication_date">
-                <p>Дата публикации: {{ full_news[2] }}</p>
+        <h1>Новости</h1>
+<!--  
+        <div class="news-sort-by">
+            <select name="sort-by" class="form-control" onchange="window.location.href = this.options[this.selectedIndex].value">
+                <option selected disabled>Сортировать по дате</option>
+                <option value="{{ url_for('index', sort_by='новые')}}">Сначала новые</option>
+                <option value="{{ url_for('index', sort_by='устаревшие')}}">Сначала устаревшие</option>
+            </select>            
+        </div>
+ -->
+        {% for new in items_on_page %}
+        <div class="news-item">
+            <div class="list_of_articles">
+                <a href="{{ url_for('new', new_id=new[0]) }}">
+                    <img src="{{ url_for('static', filename='img/images_news/' + new[2]) }}" alt="" class="img-news">
+                </a>
             </div>
-            <div class="article_image">
-                <img src="{{ url_for('static', filename='img/images_news/' + full_news[3]) }}" alt="" class="img-article">
-            </div>
-            <p>{{ full_news[1]|safe }}</p>
+            <a href="{{ url_for('new', new_id=new[0]) }}"><h3>{{ new[1] }}</h3></a>
+        </div>
+        {% endfor %}
+
+        
+        <!-- Добавьте новости здесь -->
+    </div>
+
+    <div class="pages">
+        <ul class="pagination">
+
+            {% if page > 1 %}
+            <li><a href="{{ url_for('news', page=page-1) }}">Пред</a></li>
+            {% endif %}
+
+            {% for i in range(1, total_pages+1) %}
+            <li class="{% if page == i %} active {% endif %}"><a href="{{ url_for('news', page=i) }}">{{ i }}</a></li>
+            {% endfor %}
             
-        </article>
+            {% if page < total_pages %}
+            <li><a href="{{ url_for('news', page=page+1) }}">След</a></li>
+            {% endif %}
+
+        </ul>
     </div>
 </body>
 
@@ -32,3 +57,4 @@
 {% block footer %}
 {{ super() }}
 {% endblock %}
+

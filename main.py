@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, g, request
+from flask import render_template, g, request, redirect
 import sqlite3 as sq
 import os
 from tengrinews_db import ArticlesDB
@@ -43,7 +43,17 @@ def close_db(error):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    news_main = dbase.get_news_for_main()
+    articles_main = dbase.get_articles_for_main()
+    kazakhstan_future_news_for_main = dbase.get_kazakhstan_future_news_for_main()
+
+    return render_template('index.html', news_main=news_main, articles_main=articles_main, kazakhstan_future_news_for_main=kazakhstan_future_news_for_main)
+
+
+@app.route('/news', methods=['GET', 'POST'])
+def news():
     news = dbase.get_news_announcement()
+
 
     page = request.args.get('page', 1, type=int)
     per_page = 12
@@ -53,14 +63,14 @@ def index():
 
     items_on_page = news[start:end]
 
-    return render_template('index.html', news=news, page=page, total_pages=total_pages, items_on_page=items_on_page)
+    return render_template('news.html', news=news, page=page, total_pages=total_pages, items_on_page=items_on_page)
 
 
-@app.route('/news/<int:news_id>', methods=['GET', 'POST'])
-def news(news_id):
-    full_news = dbase.get_full_news(news_id)
+@app.route('/new/<int:new_id>', methods=['GET', 'POST'])
+def new(new_id):
+    full_news = dbase.get_full_news(new_id)
 
-    return render_template('news.html', full_news=full_news)
+    return render_template('new.html', full_news=full_news)
 
 
 @app.route('/articles', methods=['GET', 'POST'])

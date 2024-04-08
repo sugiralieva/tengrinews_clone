@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<body>
+    <ul class="breadcrumb">
+        <li><a href="{{ url_for('index') }}">Главная ></a>
+        </li>
+        <li>Новости</li>
+    </ul>
+
+    <div class="container">
+        <article class="article">
+            <h1>{{ full_news[0] }}</h1>
+            <div class="publication_date">
+                <p>Дата публикации: {{ full_news[2] }}</p>
+            </div>
+            <div class="article_image">
+                <img src="{{ url_for('static', filename='img/images_news/' + full_news[3]) }}" alt="" class="img-article">
+            </div>
+            <p>{{ full_news[1]|safe }}</p>
+            
+        </article>
+    </div>
+</body>
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
