@@ -9,15 +9,15 @@
 <body>
     <div class="container">
         <h1>Новости</h1>
-<!--  
-        <div class="news-sort-by">
-            <select name="sort-by" class="form-control" onchange="window.location.href = this.options[this.selectedIndex].value">
-                <option selected disabled>Сортировать по дате</option>
-                <option value="{{ url_for('index', sort_by='новые')}}">Сначала новые</option>
-                <option value="{{ url_for('index', sort_by='устаревшие')}}">Сначала устаревшие</option>
-            </select>            
-        </div>
- -->
+
+        <form method="GET" action="{{ url_for('news') }}">
+            <select name="sort_by" id="sort_by">
+                <option value="date_asc" {% if sort_by == 'date_asc' %}selected{% endif %}>Сначала свежие</option>
+                <option value="date_desc" {% if sort_by == 'date_desc' %}selected{% endif %}>Сначала устаревшие</option>
+            </select>
+            <input class="btn" type="submit" value="Применить">
+        </form>
+
         {% for new in items_on_page %}
         <div class="news-item">
             <div class="list_of_articles">

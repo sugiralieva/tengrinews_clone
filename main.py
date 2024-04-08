@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, g, request, redirect
+from flask import render_template, g, request, redirect, session
 import sqlite3 as sq
 import os
 from tengrinews_db import ArticlesDB
@@ -41,6 +41,17 @@ def close_db(error):
         g.link_db.close()
 
 
+# def pagination(data):
+#     page = request.args.get('page', 1, type=int)
+#     per_page = 12
+#     start = (page - 1) * per_page
+#     end = start + per_page
+#     total_pages = (len(data) + per_page -1) // per_page
+#
+#     items_on_page = data[start:end]
+#     return page, total_pages, items_on_page
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     news_main = dbase.get_news_for_main()
@@ -50,10 +61,20 @@ def index():
     return render_template('index.html', news_main=news_main, articles_main=articles_main, kazakhstan_future_news_for_main=kazakhstan_future_news_for_main)
 
 
-@app.route('/news', methods=['GET', 'POST'])
+@app.route('/news', methods=['GET'])
 def news():
-    news = dbase.get_news_announcement()
+    sort_by = request.args.get('sort_by')
+    if sort_by:
+        session['sort_by'] = sort_by  # Сохраняем выбор пользователя в сессии
+    else:
+        sort_by = session.get('sort_by', 'date_asc')
 
+    if sort_by == 'date_asc':
+        news = dbase.get_news_asc()
+    elif sort_by == 'date_desc':
+        news = dbase.get_news_desc()
+    else:
+        news = dbase.get_news_asc()
 
     page = request.args.get('page', 1, type=int)
     per_page = 12
@@ -63,7 +84,7 @@ def news():
 
     items_on_page = news[start:end]
 
-    return render_template('news.html', news=news, page=page, total_pages=total_pages, items_on_page=items_on_page)
+    return render_template('news.html', news=news, page=page, total_pages=total_pages, items_on_page=items_on_page, sort_by=sort_by)
 
 
 @app.route('/new/<int:new_id>', methods=['GET', 'POST'])
@@ -75,7 +96,18 @@ def new(new_id):
 
 @app.route('/articles', methods=['GET', 'POST'])
 def articles():
-    articles = dbase.get_articles_announcement()
+    sort_by = request.args.get('sort_by')
+    if sort_by:
+        session['sort_by'] = sort_by  # Сохраняем выбор пользователя в сессии
+    else:
+        sort_by = session.get('sort_by', 'date_asc')
+
+    if sort_by == 'date_asc':
+        articles = dbase.get_articles_asc()
+    elif sort_by == 'date_desc':
+        articles = dbase.get_articles_desc()
+    else:
+        articles = dbase.get_articles_asc()
 
     page = request.args.get('page', 1, type=int)
     per_page = 12
@@ -85,7 +117,7 @@ def articles():
 
     items_on_page = articles[start:end]
 
-    return render_template('articles.html', articles=articles, page=page, total_pages=total_pages, items_on_page=items_on_page)
+    return render_template('articles.html', articles=articles, page=page, total_pages=total_pages, items_on_page=items_on_page, sort_by=sort_by)
 
 
 @app.route('/article/<int:article_id>', methods=['GET', 'POST'])
@@ -97,7 +129,18 @@ def article(article_id):
 
 @app.route('/kazakhstan_future', methods=['GET', 'POST'])
 def kazakhstan_future_news():
-    kazakhstan_news = dbase.get_kazakhstan_future_announcement()
+    sort_by = request.args.get('sort_by')
+    if sort_by:
+        session['sort_by'] = sort_by  # Сохраняем выбор пользователя в сессии
+    else:
+        sort_by = session.get('sort_by', 'date_asc')
+
+    if sort_by == 'date_asc':
+        kazakhstan_news = dbase.get_kazakhstan_future_asc()
+    elif sort_by == 'date_desc':
+        kazakhstan_news = dbase.get_kazakhstan_future_desc()
+    else:
+        kazakhstan_news = dbase.get_kazakhstan_future_asc()
 
     page = request.args.get('page', 1, type=int)
     per_page = 12
@@ -107,7 +150,7 @@ def kazakhstan_future_news():
 
     items_on_page = kazakhstan_news[start:end]
 
-    return render_template('kazakhstan_future.html', kazakhstan_news=kazakhstan_news, page=page, total_pages=total_pages, items_on_page=items_on_page)
+    return render_template('kazakhstan_future.html', kazakhstan_news=kazakhstan_news, page=page, total_pages=total_pages, items_on_page=items_on_page, sort_by=sort_by)
 
 
 @app.route('/kazakhstan_future_new/<int:kazakhstan_news_id>', methods=['GET', 'POST'])

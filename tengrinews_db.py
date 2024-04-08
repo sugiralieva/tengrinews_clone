@@ -33,23 +33,18 @@ class ArticlesDB:
             print('Ошибка получения новостей из категории Что будет с Казахстаном?' + str(e))
         return False
 
-    # def get_news_announcement(self, sort_by):
-    #     try:
-    #         if sort_by == 'новые':
-    #             self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date DESC')
-    #             res = self.cursor.fetchall()
-    #             return res
-    #         elif sort_by == 'устаревшие':
-    #             self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date ASC')
-    #             res = self.cursor.fetchall()
-    #             return res
-    #     except sq.Error as e:
-    #         print('Ошибка получения новостей' + str(e))
-    #     return False
-
-    def get_news_announcement(self):
+    def get_news_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM news')
+            self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date DESC')
+            res = self.cursor.fetchall()
+            return res
+        except sq.Error as e:
+            print('Ошибка получения новостей' + str(e))
+        return False
+
+    def get_news_desc(self):
+        try:
+            self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -65,9 +60,18 @@ class ArticlesDB:
             print('Ошибка получения новости' + str(e))
         return False
 
-    def get_articles_announcement(self):
+    def get_articles_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM articles')
+            self.cursor.execute('SELECT id, title, image FROM articles ORDER BY publication_date DESC')
+            res = self.cursor.fetchall()
+            return res
+        except sq.Error as e:
+            print('Ошибка получения книг по категории' + str(e))
+        return False
+
+    def get_articles_desc(self):
+        try:
+            self.cursor.execute('SELECT id, title, image FROM articles ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -83,9 +87,18 @@ class ArticlesDB:
             print('Ошибка получения книг по категории' + str(e))
         return False
 
-    def get_kazakhstan_future_announcement(self):
+    def get_kazakhstan_future_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future')
+            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future ORDER BY publication_date DESC')
+            res = self.cursor.fetchall()
+            return res
+        except sq.Error as e:
+            print('Ошибка получения новостей из категории Что будет с Казахстаном?' + str(e))
+        return False
+
+    def get_kazakhstan_future_desc(self):
+        try:
+            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:

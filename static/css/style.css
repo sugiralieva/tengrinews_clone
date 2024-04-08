@@ -152,7 +152,27 @@ p {
 .article_image .img-article {
     padding-top: 30px;
 }
-
+select {
+    width: fit-content;
+    padding: 5px;
+}
+.btn {
+    background-color: #32a801;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 3px;
+    border-color: #32a801;
+}
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn-primary {
+  color: #ffffff;
+  background-color: #5fbb39;
+  border-color: #5fbb39;
+}
 .pagination {
     margin: 20px 0;
     font-family: "Roboto", Helvetica, Arial, sans-serif;

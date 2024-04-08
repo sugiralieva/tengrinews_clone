@@ -9,6 +9,15 @@
 <body>
     <div class="container">
         <h1>Статьи</h1>
+
+        <form method="GET" action="{{ url_for('articles') }}">
+            <select name="sort_by" id="sort_by">
+                <option value="date_asc" {% if sort_by == 'date_asc' %}selected{% endif %}>Сначала свежие</option>
+                <option value="date_desc" {% if sort_by == 'date_desc' %}selected{% endif %}>Сначала устаревшие</option>
+            </select>
+            <input class="btn" type="submit" value="Применить">
+        </form>
+
         {% for article in items_on_page %}
         <div class="news-item">
             <div class="list_of_articles">
