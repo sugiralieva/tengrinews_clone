@@ -1,0 +1,64 @@
+.dws-menu [type="checkbox"] {
+ display: none;
+ margin-top: auto;
+}
+.dws-menu label.toggleMenu{
+ display: none;
+ padding: 15px 40px;
+ text-transform: none;
+ font-size: 14px;
+ font-weight: bold;
+ cursor: pointer;
+ position: relative;
+ margin-top: auto;
+ text-align: center;
+}
+.dws-menu label.toggleMenu{
+    background: #32a801;
+    color: #fff;
+}
+
+
+@media all and (max-width: 800px){
+ .dws-menu{
+  overflow: hidden;
+ }
+ .logo-image{
+    top: 0;
+    overflow: hidden;
+ }
+ .search input{
+    width: 40px;;
+ }
+ .search .btn{
+    width: 25px;;
+ }
+ .dws-menu ul{
+  display: block;
+  max-height: 0;
+  transition: max-height 0.3s;
+  text-align: center;
+ }
+ .dws-menu li>ul li ul{
+  position: absolute;
+  right: auto;
+  top: auto;
+ }
+ .dws-menu label.toggleMenu{
+  display: block;
+ }
+ input.toggleMenu:checked + label.toggleMenu{
+  background: #32a801;
+  color: #fff;
+ }
+ input.toggleMenu:checked ~ ul{
+  display: block;
+  position: relative;
+  max-height: 1000px;
+  transition: max-height 2s ease-in;
+ }
+
+}
+
+
+

@@ -8,7 +8,7 @@
 <body>
 <div class="main_container">
   <div class="block">
-    <h2><a href="{{ url_for('news')}}">Новости ></a></h2>
+    <h2><a href="{{ url_for('news')}}">Новости</a></h2>
     {% for new in news_main %}
     <div class="news-item-main">
       <div class="list_of_main_news">
@@ -23,7 +23,7 @@
 
 
   <div class="block">
-    <h2><a href="{{ url_for('articles')}}">Статьи ></a></h2>
+    <h2><a href="{{ url_for('articles')}}">Статьи</a></h2>
     {% for article in articles_main %}
     <div class="news-item-main">
       <div class="list_of_main_news">
@@ -38,7 +38,7 @@
 
 
   <div class="block">
-    <h2><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном? ></a></h2>
+    <h2><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном?</a></h2>
     {% for news in kazakhstan_future_news_for_main %}
     <div class="news-item-main">
       <div class="list_of_main_news">

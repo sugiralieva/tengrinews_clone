@@ -5,29 +5,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-****" crossorigin="anonymous" />
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet" type="text/css">
     <title>Главные новости Казахстана</title>
    
     <div class="header">
-        <a href="{{ url_for('index') }}">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" height="70">
-        </a>
-        <div class="nav">
+
+        <div class="search" id="search">
+            <form role="search" action="{{ url_for('search') }}" method="POST">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Поиск">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="logo-image">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo" class="logo" height="70">
+            </a>
+        </div>
+
+
+
+        <nav class="dws-menu">
+            <input type="checkbox" name="toggle" id="menu" class="toggleMenu">
+            <label for="menu" class="toggleMenu">Меню</label>
             <ul>
                 <li><a href="{{ url_for('news')}}">Новости</a></li>
                 <li><a href="{{ url_for('articles')}}">Статьи</a></li>
                 <li><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном?</a></li>
             </ul>
+        </nav>
 
-            <div class="search" id="search">
-                <form role="search" action="{{ url_for('search') }}" method="POST">
-                    <div class="input-group">
-                        <input type="text" name="query" class="form-control" placeholder="Поиск">
-                        <button type="submit" class="btn btn-primary">Поиск</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+
 
     </div>
 
