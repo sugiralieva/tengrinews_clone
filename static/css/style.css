@@ -1,5 +1,5 @@
 .main_container {
-    width: 80%;
+    max-width: 80%;
     display: block;
     margin: 0 auto;
     padding: 20px;
@@ -47,7 +47,9 @@ body {
 .header img {
     float: left;
 }
-
+.nav {
+    display: inline;
+}
 .nav ul{
     padding-top: 10px;
     padding-left: 350px;
@@ -62,7 +64,10 @@ body {
     text-decoration: none;
     color:#000;
 }
-
+.search {
+    float: right;
+    margin-right: 10%;
+}
 .green_line {
     width: 100%;
     height: 50px;
@@ -152,7 +157,7 @@ p {
 .article_image .img-article {
     padding-top: 30px;
 }
-select {
+select, .form-control {
     width: fit-content;
     padding: 5px;
 }

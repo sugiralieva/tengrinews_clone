@@ -18,8 +18,21 @@
                 <li><a href="{{ url_for('articles')}}">Статьи</a></li>
                 <li><a href="{{ url_for('kazakhstan_future_news')}}">Что будет с Казахстаном?</a></li>
             </ul>
+
+            <div class="search" id="search">
+                <form role="search" action="{{ url_for('search') }}" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Поиск">
+                        <button type="submit" class="btn btn-primary">Поиск</button>
+                    </div>
+                </form>
+            </div>
         </div>
+
     </div>
+
+
+
     <div class="green_line">
         <a href="https://whatsapp.com/channel/0029VaC8d1M3AzNVm4DlYk2H">
             Подписывайтесь на канал Tengrinews.kz в WhatsApp

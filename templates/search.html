@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block header %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<body>
+    <ul class="breadcrumb">
+        <li><a href="{{ url_for('index') }}">Главная ></a>
+        </li>
+        <li>Результаты поиска</li>
+    </ul>
+
+    <div class="container">
+        <h2>Результаты поиска для "{{ query }}"</h2>
+
+            {% if search_result %}
+            {% for new in search_result %}
+            <div class="news-item">
+                <div class="list_of_articles">
+                    <a href="{{ url_for('new', new_id=new[0]) }}">
+                        <img src="{{ url_for('static', filename='img/images_news/' + new[2]) }}" alt="" class="img-news">
+                    </a>
+                </div>
+                <a href="{{ url_for('new', new_id=new[0]) }}"><h3>{{ new[1] }}</h3></a>
+            </div>
+            {% endfor %}
+            {% else %}
+                <p> Ничего не найдено </p>
+            {% endif %}
+
+    </div>
+</body>
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}

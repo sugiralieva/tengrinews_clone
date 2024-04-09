@@ -41,17 +41,6 @@ def close_db(error):
         g.link_db.close()
 
 
-# def pagination(data):
-#     page = request.args.get('page', 1, type=int)
-#     per_page = 12
-#     start = (page - 1) * per_page
-#     end = start + per_page
-#     total_pages = (len(data) + per_page -1) // per_page
-#
-#     items_on_page = data[start:end]
-#     return page, total_pages, items_on_page
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     news_main = dbase.get_news_for_main()
@@ -59,6 +48,14 @@ def index():
     kazakhstan_future_news_for_main = dbase.get_kazakhstan_future_news_for_main()
 
     return render_template('index.html', news_main=news_main, articles_main=articles_main, kazakhstan_future_news_for_main=kazakhstan_future_news_for_main)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    query = request.form.get('query')
+    search_result = dbase.get_search_result(query)
+
+    return render_template('search.html', news=news, search_result=search_result, query=query)
 
 
 @app.route('/news', methods=['GET'])

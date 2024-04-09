@@ -33,6 +33,19 @@ class ArticlesDB:
             print('Ошибка получения новостей из категории Что будет с Казахстаном?' + str(e))
         return False
 
+    def get_search_result(self, search_data):
+        try:
+            self.cursor.execute(f'''
+SELECT id, title, image
+FROM news
+WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
+''')
+            res = self.cursor.fetchall()
+            return res
+        except sq.Error as e:
+            print('Ошибка получения новостей из категории Что будет с Казахстаном?' + str(e))
+        return False
+
     def get_news_asc(self):
         try:
             self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date DESC')
