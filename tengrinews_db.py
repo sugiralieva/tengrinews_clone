@@ -8,7 +8,7 @@ class ArticlesDB:
 
     def get_news_for_main(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM news LIMIT 4')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM news ORDER BY publication_date DESC LIMIT 4')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -17,7 +17,7 @@ class ArticlesDB:
 
     def get_articles_for_main(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM articles LIMIT 4')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM articles ORDER BY publication_date DESC LIMIT 4')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -26,7 +26,7 @@ class ArticlesDB:
 
     def get_kazakhstan_future_news_for_main(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future LIMIT 4')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM kazakhstan_future ORDER BY publication_date DESC LIMIT 4')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -36,7 +36,7 @@ class ArticlesDB:
     def get_search_result(self, search_data):
         try:
             self.cursor.execute(f'''
-SELECT id, title, image
+SELECT id, title, image, publication_date
 FROM news
 WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 ''')
@@ -48,7 +48,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_news_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date DESC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM news ORDER BY publication_date DESC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -57,7 +57,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_news_desc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM news ORDER BY publication_date ASC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM news ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -75,7 +75,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_articles_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM articles ORDER BY publication_date DESC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM articles ORDER BY publication_date DESC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -84,7 +84,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_articles_desc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM articles ORDER BY publication_date ASC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM articles ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -102,7 +102,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_kazakhstan_future_asc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future ORDER BY publication_date DESC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM kazakhstan_future ORDER BY publication_date DESC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:
@@ -111,7 +111,7 @@ WHERE title LIKE '%{search_data}%' OR news_text LIKE '%{search_data}%'
 
     def get_kazakhstan_future_desc(self):
         try:
-            self.cursor.execute('SELECT id, title, image FROM kazakhstan_future ORDER BY publication_date ASC')
+            self.cursor.execute('SELECT id, title, image, publication_date FROM kazakhstan_future ORDER BY publication_date ASC')
             res = self.cursor.fetchall()
             return res
         except sq.Error as e:

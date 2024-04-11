@@ -3,6 +3,12 @@ from flask import render_template, g, request, redirect, session
 import sqlite3 as sq
 import os
 from tengrinews_db import ArticlesDB
+import schedule
+import time
+import threading
+from parsing.parse_news_tengrinews import UpdateNews
+from parsing.parse_articles_tengrinews import UpdateArticles
+from parsing.parse_Kazakhstan_future_tengrinews import UpdateKazakhstanNews
 
 
 SECRET_KEY = 'fdgdfgdfggf786hfg6hfg6h7f'
@@ -27,7 +33,37 @@ def get_db():
     return g.link_db
 
 
+db_lock = threading.Lock()
+
+def update_db():
+    with db_lock:
+        url_news = UpdateNews()
+        urls_pages_news = url_news.parse_news_urls()
+        url_news.parse_news_pages(urls_pages_news)
+        print('done news')
+
+        url_articles = UpdateArticles()
+        urls_pages_articles = url_articles.parse_articles_urls()
+        url_articles.parse_articles_pages(urls_pages_articles)
+        print('done articles')
+
+        url_kaz = UpdateKazakhstanNews()
+        url_pages_kaz = url_kaz.parse_kazakhstan_news_urls()
+        url_kaz.parse_kazakhstan_news_pages(url_pages_kaz)
+        print('done kaz news')
+
+
+def scheduled_task():
+    schedule.every(1).day.do(update_db)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
 dbase = None
+
+
 @app.before_request
 def before_request():
     global dbase
@@ -157,5 +193,9 @@ def kazakhstan_future_new(kazakhstan_news_id):
     return render_template('kazakhstan_future_news.html', kazakhstan_new=kazakhstan_new)
 
 
+update_thread = threading.Thread(target=scheduled_task)
+update_thread.start()
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(use_reloader=False)

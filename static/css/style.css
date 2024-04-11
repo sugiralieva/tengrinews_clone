@@ -52,6 +52,9 @@
     text-decoration: none;
     color: #000;
   }
+  .block a:hover {
+    color: #32a801;
+  }
   .news-item-main {
     display: inline-block;
     width: 200px;
@@ -132,14 +135,15 @@ body {
     color: #000;
     text-decoration: none;
 }
+.news-item a:hover {
+    color: #32a801;
+}
 .article {
     border: 1px solid #fff;
     padding: 10px;
     margin-bottom: 20px;
 }
-.publication_date p {
-    color: #787878;
-}
+
 .footer {
     background-color: #333;
     color: #fff;
